@@ -1,0 +1,18 @@
+# Запустить в терминале docker-compose up -d
+# Остановить контейнеры docker-compose down
+services:
+  demo6-backend:
+    image: grigof/microservices-backend:1.0.0        
+  demo6-gate:
+    image: grigof/microservices-gateway:1.0.0
+    environment:
+      - SECRET=${SECRET}
+      - BACKEND_URL=${BACKEND_URL}    
+    ports:
+      - "80:8080"
+    depends_on:
+      - demo6-backend
+
+networks:
+  demo6-network:
+    driver: bridge
